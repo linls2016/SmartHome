@@ -1,0 +1,15 @@
+<RelativeLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@android:color/black"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+	<ImageView
+	    android:src="@drawable/welcome" 
+	    android:contentDescription="@string/welcom"
+	    android:layout_centerHorizontal="true"
+	    android:layout_centerVertical="true"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"/>
+
+</RelativeLayout>

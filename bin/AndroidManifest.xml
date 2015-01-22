@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.lins.smarthome"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="21" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/icon"
+        android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen" 
+        android:label="@string/app_name">
+        <activity
+            android:name="com.lins.smarthome.StartActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen" 
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+        	android:name="com.lins.smarthome.MainActivity" 
+        	android:theme="@android:style/Theme.Light.NoTitleBar" >
+		</activity>
+		<activity
+        	android:name="com.lins.smarthome.LightActivity" 
+        	android:theme="@android:style/Theme.Light.NoTitleBar" >
+		</activity>
+        <activity
+        	android:name="com.lins.smarthome.SocketActivity" 
+        	android:theme="@android:style/Theme.Light.NoTitleBar" >
+		</activity>
+		<activity
+        	android:name="com.lins.smarthome.EnvironmentActivity" 
+        	android:theme="@android:style/Theme.Light.NoTitleBar" >
+		</activity>
+		<activity
+        	android:name="com.lins.smarthome.SecurityActivity" 
+        	android:theme="@android:style/Theme.Light.NoTitleBar" >
+		</activity>
+    </application>
+
+</manifest>
