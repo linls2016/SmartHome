@@ -7,9 +7,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
+	private LinkWifi wifi;
 	private Intent intent;
 	private GridView gv;
 	private int[] imgRes = new int[] { R.drawable.main_light,
@@ -20,7 +22,11 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		LinkWifi();
+		wifi = new LinkWifi(this);
+		if (!wifi.isConnect()) {
+			wifi.getConnect();
+			Toast.makeText(this, "连接成功", Toast.LENGTH_SHORT).show();
+		}
 		this.gv = (GridView) super.findViewById(R.id.gv);
 		this.gv.setAdapter(new MainGridAdapter(this, this.imgRes));
 		this.gv.setOnItemClickListener(new OnItemClickListener() {
@@ -31,11 +37,12 @@ public class MainActivity extends Activity {
 					switch (position) {
 					case 0:
 							intent = new Intent(MainActivity.this, LightActivity.class);
+							wifi.sendMsg("LinLiangsheng");
 							startActivity(intent);
 						break;
 					case 1:
 						intent = new Intent(MainActivity.this, SocketActivity.class);
-						startActivity(intent);
+						MainActivity.this.startActivity(intent);
 					break;
 					case 2:
 						intent = new Intent(MainActivity.this, EnvironmentActivity.class);
@@ -48,10 +55,6 @@ public class MainActivity extends Activity {
 					}
 			}
 		});
-	}
-
-	private void LinkWifi() {
-		
 	}
 
 }
