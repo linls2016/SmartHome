@@ -1,19 +1,20 @@
 package com.lins.smarthome;
 
-import android.content.Context;
-
 public class Socket {
 
-	private Context context;		//承接上下文
+	private boolean check = true;
 	private boolean status;		//插座的状态
+	private String socketReceive = null;
+	private LinkWifi wifi;
 
 	/**
 	 * 构造方法，传入context对象
 	 * @param context
 	 */
-	public Socket(Context context) {
+	public Socket() {
 		super();
-		this.context = context;
+		wifi = LinkWifi.getInstance();
+		wifi.setReceiveMsg(null);
 	}
 	
 	/**
@@ -21,25 +22,33 @@ public class Socket {
 	 * @return status 插座的状态
 	 */
 	public boolean checkStatus() {
-		return this.status;
+		wifi.sendMsg("SCHK");
+		while (check) {
+			socketReceive = wifi.getReceiveMsg();
+			if ("SOON".equals(socketReceive)) {
+				status = true;
+				check = false;
+			}
+			if ("SOFF".equals(socketReceive)) {
+				status = false;
+				check = false;
+			}
+		}
+		return status;
 	}
 	
 	/**
 	 * 设置插座开启
-	 * @return status is true
 	 */
-	public boolean setSocketOn() {
-		this.status = true;
-		return this.status;
+	public void setSocketOn() {
+		wifi.sendMsg("S00T");
 	}
 	
 	/**
 	 * 设置插座关闭
-	 * @return status is false
 	 */
-	public boolean setSocketOff() {
-		this.status = false;
-		return this.status;
+	public void setSocketOff() {
+		wifi.sendMsg("S00F");
 	}
 	
 }
