@@ -44,10 +44,12 @@ public class SocketActivity extends Activity {
 			if (!key) {
 				sk.setSocketOn();
 				socket.setImageResource(R.drawable.socket_on);
+				new Player(SocketActivity.this, R.raw.socket_open).play();
 				key = true;
 			} else {
 				sk.setSocketOff();
 				socket.setImageResource(R.drawable.socket_off);
+				new Player(SocketActivity.this, R.raw.socket_close).play();
 				key = false;
 			}
 		}

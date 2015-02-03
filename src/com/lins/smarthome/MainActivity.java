@@ -44,14 +44,17 @@ public class MainActivity extends Activity {
 					case 1:
 						intent = new Intent(MainActivity.this, SocketActivity.class);
 						startActivity(intent);
+//						wifi.sendMsg("SCHKZ");
 					break;
 					case 2:
 						intent = new Intent(MainActivity.this, EnvironmentActivity.class);
 						startActivity(intent);
+//						wifi.sendMsg("S00TZ");
 					break;
 					case 3:
 						intent = new Intent(MainActivity.this, SecurityActivity.class);
 						startActivity(intent);
+//						wifi.sendMsg("S00FZ");
 					break;
 					}
 			}

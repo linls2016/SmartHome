@@ -22,7 +22,7 @@ public class Socket {
 	 * @return status 插座的状态
 	 */
 	public boolean checkStatus() {
-		wifi.sendMsg("SCHK");
+		wifi.sendMsg("SCHKZ");
 		while (check) {
 			socketReceive = wifi.getReceiveMsg();
 			if ("SOON".equals(socketReceive)) {
@@ -41,14 +41,14 @@ public class Socket {
 	 * 设置插座开启
 	 */
 	public void setSocketOn() {
-		wifi.sendMsg("S00T");
+		wifi.sendMsg("S00TZ");
 	}
 	
 	/**
 	 * 设置插座关闭
 	 */
 	public void setSocketOff() {
-		wifi.sendMsg("S00F");
+		wifi.sendMsg("S00FZ");
 	}
 	
 }

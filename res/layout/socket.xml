@@ -6,11 +6,11 @@
     
     <ImageView 
         android:id="@+id/socket"
+        android:src="@drawable/socket_off"
         android:contentDescription="@string/contentDescription"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
         android:layout_marginBottom="100dp"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
     <TextView 

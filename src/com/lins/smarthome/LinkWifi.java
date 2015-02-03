@@ -1,7 +1,9 @@
 package com.lins.smarthome;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.Socket;
@@ -93,7 +95,8 @@ public class LinkWifi {
 				e.printStackTrace();
 			}
 			while (isReceive) {
-				byte[] receiveBuffer = new byte[512];
+				/*
+				byte[] receiveBuffer = new byte[2];
 				try {
 					inStream.read(receiveBuffer);
 				} catch (IOException e) {
@@ -103,6 +106,14 @@ public class LinkWifi {
 					receiveMsg = new String(receiveBuffer,"UTF-8").trim();
 					System.out.println(receiveMsg);
 				} catch (UnsupportedEncodingException e) {
+					e.printStackTrace();
+				}
+				*/
+				try {
+					BufferedReader buffer = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+					receiveMsg = buffer.readLine();
+					System.out.println(receiveMsg);
+				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
