@@ -6,5 +6,20 @@
     <string name="action_settings">Settings</string>
     <string name="welcom">welcom</string>
     <string name="contentDescription">contentDescription</string>
+    <string name="ip">IP:</string>
+    <string name="ipaddr">192.168.11.254</string>
+    <string name="port">Port:</string>
+    <string name="portVal">8888</string>
+    <string name="cb_password">记住密码</string>
+    <string name="cb_autolink">自动登录</string>
+    <string name="btn_linkdevice">连接设备</string>
+    <string name="tv_securitysetting">报警时段设置</string>
+    <string name="tv_title_security">安防报警</string>
+    <string name="tv_title_light">灯光控制</string>
+    <string name="tv_title_environment">环境监测</string>
+    <string name="tv_title_socket">插座控制</string>
+    <string name="tv_title_app">智能家居</string>
+    <string name="tv_app_version">Version 1.0.0</string>
+    <string name="tv_app_copyleft">林亮生 CopyLeft@2015 Lins</string>
 
 </resources>

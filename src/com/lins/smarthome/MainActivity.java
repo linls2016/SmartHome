@@ -3,17 +3,15 @@ package com.lins.smarthome;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
-	private TextView title;
-	private LinkWifi wifi;
 	private Intent intent;
 	private GridView gv;
 	private int[] imgRes = new int[] { R.drawable.main_light,
@@ -24,11 +22,6 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		wifi = LinkWifi.getInstance();
-		wifi.getConnect();
-		Toast.makeText(this, "连接成功", Toast.LENGTH_SHORT).show();
-		title = (TextView) findViewById(R.id.txt);
-		title.setText("LinLiangsheng");
 		this.gv = (GridView) super.findViewById(R.id.gv);
 		this.gv.setAdapter(new MainGridAdapter(this, this.imgRes));
 		this.gv.setOnItemClickListener(new OnItemClickListener() {
@@ -37,27 +30,44 @@ public class MainActivity extends Activity {
 					int position, long id) {
 					switch (position) {
 					case 0:
-//							intent = new Intent(MainActivity.this, LightActivity.class);
-							wifi.sendMsg("LinLiangsheng");
-//							startActivity(intent);
+							intent = new Intent(MainActivity.this, LightActivity.class);
+							startActivity(intent);
+							finish();
 						break;
 					case 1:
-						intent = new Intent(MainActivity.this, SocketActivity.class);
-						startActivity(intent);
-//						wifi.sendMsg("SCHKZ");
-					break;
+							intent = new Intent(MainActivity.this, SocketActivity.class);
+							startActivity(intent);
+							finish();
+						break;
 					case 2:
-						intent = new Intent(MainActivity.this, EnvironmentActivity.class);
-						startActivity(intent);
-//						wifi.sendMsg("S00TZ");
-					break;
+							intent = new Intent(MainActivity.this, EnvironmentActivity.class);
+							startActivity(intent);
+							finish();
+						break;
 					case 3:
-						intent = new Intent(MainActivity.this, SecurityActivity.class);
-						startActivity(intent);
-//						wifi.sendMsg("S00FZ");
-					break;
+							intent = new Intent(MainActivity.this, SecurityActivity.class);
+							startActivity(intent);
+							finish();
+						break;
 					}
 			}
 		});
 	}
+	
+	private long exitTime = 0;
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+			if ((System.currentTimeMillis() - exitTime) > 2000) {
+				Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();
+				exitTime = System.currentTimeMillis();
+			} else {
+				finish();
+				System.exit(0);
+			}
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+	
 }

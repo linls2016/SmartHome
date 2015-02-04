@@ -1,5 +1,8 @@
 package com.lins.smarthome;
-
+/**
+ * @author LinLiangsheng
+ * Player.java用于播放mp3声音文件
+ */
 import android.content.Context;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
@@ -16,6 +19,9 @@ public class Player {
 		this.res = res;
 	}
 
+	/**
+	 * 播放声音，播放结束释放资源
+	 */
 	public void play() {
 		media = MediaPlayer.create(context, res);
 		media.setOnCompletionListener(new OnCompletionListener() {

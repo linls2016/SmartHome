@@ -1,10 +1,13 @@
 package com.lins.smarthome;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class SocketActivity extends Activity {
 
@@ -54,4 +57,13 @@ public class SocketActivity extends Activity {
 			}
 		}
 	}
+	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		Intent intent = new Intent(SocketActivity.this, MainActivity.class);
+		startActivity(intent);
+		finish();
+		return super.onKeyDown(keyCode, event);
+	}
+	
 }
