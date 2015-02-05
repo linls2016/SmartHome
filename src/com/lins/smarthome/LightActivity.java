@@ -25,15 +25,15 @@ public class LightActivity extends Activity {
 	
 	private void initView() {
 		backup = (ImageView) findViewById(R.id.light_backup);
+		/*
 		backup.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(LightActivity.this, MainActivity.class);
-				startActivity(intent);
-				finish();
-				overridePendingTransition(R.anim.menu_in, R.anim.menu_out);		//动画
+				System.out.println("OnClick >>>>>>>>>>>>>>>>>>>>>>>>>");
+
 			}
 		});
+		*/
 		backup.setOnTouchListener(new OnTouchListener() {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
@@ -41,9 +41,15 @@ public class LightActivity extends Activity {
 				switch (event.getAction()) {
 				case MotionEvent.ACTION_DOWN:
 					backup.setImageResource(R.drawable.menu_up_after);
+					System.out.println("ACTION_DOWN >>>>>>>>>>>>>>>>>>>>>>>>>");
 					break;
 				case MotionEvent.ACTION_UP:
 					backup.setImageResource(R.drawable.menu_up);
+					Intent intent = new Intent(LightActivity.this, MainActivity.class);
+					startActivity(intent);
+					finish();
+					overridePendingTransition(R.anim.menu_in, R.anim.menu_out);		//动画
+					System.out.println("ACTION_UP >>>>>>>>>>>>>>>>>>>>>>>>>");
 					break;
 				default:
 					break;
@@ -58,6 +64,7 @@ public class LightActivity extends Activity {
 		Intent intent = new Intent(LightActivity.this, MainActivity.class);
 		startActivity(intent);
 		finish();
+		overridePendingTransition(R.anim.menu_in, R.anim.menu_out);		//动画
 		return super.onKeyDown(keyCode, event);
 	}
 	

@@ -1,8 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout 
+<LinearLayout 
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
+    
+    <LinearLayout 
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+      <LinearLayout 
+			android:orientation="horizontal"
+        	android:layout_width="fill_parent"
+        	android:layout_height="wrap_content">
+            <TextView
+                android:text="@string/app_name"
+                android:textSize="40sp"
+                android:textColor="@android:color/darker_gray"
+                android:gravity="center"
+                android:layout_margin="10dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <View 
+            android:background="@android:color/darker_gray"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"/>
+    </LinearLayout>
+    
+    <LinearLayout 
+        android:layout_margin="10dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <View 
+            android:background="@android:color/darker_gray"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"/>
+        <LinearLayout 
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp">
+			<View 
+            	android:background="@android:color/darker_gray"
+            	android:layout_width="2dp"
+            	android:layout_height="wrap_content"/>
+			<TextView 
+        		android:text="@string/ip"
+        		android:textSize="30sp"
+        		android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"/>
+			<View 
+            	android:background="@android:color/darker_gray"
+            	android:layout_width="2dp"
+            	android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <View 
+            android:background="@android:color/darker_gray"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"/>
+    </LinearLayout>
+    
     <TextView 
         android:id="@+id/tv_ip"
         android:text="@string/ip"
@@ -14,14 +72,12 @@
         android:inputType="text"
         android:textSize="30sp"
         android:text="@string/ipaddr"
-        android:layout_toRightOf="@id/tv_ip"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"/>
 	<TextView 
         android:id="@+id/tv_port"
         android:text="@string/port"
         android:textSize="30sp"
-        android:layout_below="@id/et_ip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
     <EditText 
@@ -29,15 +85,11 @@
         android:inputType="text"
         android:textSize="30sp"
         android:text="@string/portVal"
-        android:layout_toRightOf="@id/tv_port"
-        android:layout_below="@id/et_ip"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"/>
 	<Button 
 	    android:id="@+id/btn_linkdevice"
         android:text="@string/btn_linkdevice"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/et_port"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
-</RelativeLayout>
+</LinearLayout>

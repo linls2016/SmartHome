@@ -13,7 +13,7 @@ import android.os.Handler;
 
 public class StartActivity extends Activity {
 	
-	private static final int DELAYTIME = 1000;		//延时时间3秒
+	private static final int DELAYTIME = 3000;		//延时时间3秒
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
