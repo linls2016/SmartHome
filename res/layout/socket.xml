@@ -41,12 +41,17 @@
             android:layout_height="2dp"/>
     </LinearLayout>
     
-    <ImageView 
-        android:id="@+id/socket"
-        android:src="@drawable/socket_off"
-        android:contentDescription="@string/contentDescription"
-        android:layout_marginBottom="100dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+    <RelativeLayout 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+		<ImageView 
+	        android:id="@+id/socket"
+	        android:src="@drawable/common_button_on"
+	        android:contentDescription="@string/contentDescription"
+	        android:layout_marginBottom="100dp"
+	        android:layout_centerInParent="true"
+	        android:layout_width="150dp"
+	        android:layout_height="150dp"/>
+    </RelativeLayout>
     
 </LinearLayout>

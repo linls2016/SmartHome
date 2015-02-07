@@ -41,15 +41,36 @@
             android:layout_height="2dp"/>
     </LinearLayout>
     
-    
-	    <ImageView 
-	        android:contentDescription="@string/contentDescription"
-	        android:src="@drawable/setting"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"/>
-	    <TextView 
+    <LinearLayout 
+        android:orientation="vertical"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+		<TextView 
 	        android:text="@string/tv_securitysetting"
+	        android:textSize="25sp"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"/>
+		<TextView 
+		    android:text="@string/tv_security_info"
+		    android:textSize="20sp"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"/>
+    </LinearLayout>
+    
+    <RelativeLayout 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+		<ImageView 
+	        android:contentDescription="@string/contentDescription"
+	        android:src="@drawable/settings_on"
+	        android:layout_marginTop="10dp"
+	        android:layout_alignParentTop="true"
+	        android:layout_centerHorizontal="true"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+
 
 </LinearLayout>

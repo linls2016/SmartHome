@@ -30,11 +30,6 @@ public class Player {
 				media.release();
 			}
 		});
-		try {
-			media.prepare();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		media.start();
 	}
 	

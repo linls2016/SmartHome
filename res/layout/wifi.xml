@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout 
     xmlns:android="http://schemas.android.com/apk/res/android"
+	android:background="@android:color/background_light"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
     
+    <!-- 标题栏 -->
     <LinearLayout 
         android:orientation="vertical"
         android:layout_width="fill_parent"
@@ -28,68 +30,114 @@
             android:layout_height="2dp"/>
     </LinearLayout>
     
+    <!-- 画方框 -->
     <LinearLayout 
         android:layout_margin="10dp"
         android:orientation="vertical"
+        android:layout_weight="3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <View 
-            android:background="@android:color/darker_gray"
+        android:layout_height="0dp">
+        
+        <!-- 用RalativeLayout来绘制方框 -->
+        <RelativeLayout 
             android:layout_width="match_parent"
-            android:layout_height="2dp"/>
-        <LinearLayout 
-            android:orientation="horizontal"
+            android:layout_height="match_parent">
+            <!-- 四个View绘出四条边 -->
+			<View 
+			    android:layout_alignParentTop="true"
+	            android:background="@android:color/darker_gray"
+	            android:layout_width="match_parent"
+	            android:layout_height="2dp"/>
+			<View 
+			    android:layout_alignParentBottom="true"
+	            android:background="@android:color/darker_gray"
+	            android:layout_width="match_parent"
+	            android:layout_height="2dp"/>
+			<View 
+			    android:layout_alignParentLeft="true"
+	            android:background="@android:color/darker_gray"
+	            android:layout_width="2dp"
+	            android:layout_height="match_parent"/>
+			<View 
+			    android:layout_alignParentRight="true"
+	            android:background="@android:color/darker_gray"
+	            android:layout_width="2dp"
+	            android:layout_height="match_parent"/>
+			
+			<!-- IP编辑框 -->
+			<LinearLayout 
+			    android:layout_centerInParent="true"
+			    android:layout_margin="5dp"
+			    android:paddingBottom="50dp"
+   			    android:orientation="horizontal"
+   			    android:layout_width="match_parent"
+   			    android:layout_height="wrap_content">
+    			<TextView 
+        			android:id="@+id/tv_ip"
+        			android:text="@string/ip"
+        			android:textSize="30sp"
+        			android:layout_marginLeft="20dp"
+        			android:layout_marginRight="20dp"
+        			android:layout_width="wrap_content"
+        			android:layout_height="wrap_content"/>
+    			<EditText 
+			        android:id="@+id/et_ip"
+			        android:background="@drawable/input_bar"
+			        android:text="@string/ipaddr"
+			        android:inputType="number"
+			        android:textSize="30sp"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"/>
+			</LinearLayout>
+			
+			<!-- Port编辑框 -->
+			<LinearLayout 
+			    android:layout_centerInParent="true"
+			    android:layout_margin="5dp"
+			    android:paddingTop="50dp"
+   			    android:orientation="horizontal"
+   			    android:layout_width="match_parent"
+   			    android:layout_height="wrap_content">
+				<TextView 
+			        android:id="@+id/tv_port"
+			        android:text="@string/port"
+			        android:textSize="30sp"
+			        android:layout_marginLeft="6dp"
+			        android:layout_marginRight="6dp"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"/>
+    			<EditText 
+			        android:id="@+id/et_port"
+			        android:background="@drawable/input_bar"
+			        android:text="@string/portVal"
+			        android:inputType="number"
+			        android:textSize="30sp"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"/>
+			</LinearLayout>
+			
+        </RelativeLayout>
+        <View 
             android:layout_width="wrap_content"
-            android:layout_height="100dp">
-			<View 
-            	android:background="@android:color/darker_gray"
-            	android:layout_width="2dp"
-            	android:layout_height="wrap_content"/>
-			<TextView 
-        		android:text="@string/ip"
-        		android:textSize="30sp"
-        		android:layout_width="wrap_content"
-        		android:layout_height="wrap_content"/>
-			<View 
-            	android:background="@android:color/darker_gray"
-            	android:layout_width="2dp"
-            	android:layout_height="wrap_content"/>
-        </LinearLayout>
-        <View 
-            android:background="@android:color/darker_gray"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"/>
+            android:layout_height="wrap_content"/>
+	</LinearLayout>
+
+    <LinearLayout 
+        android:orientation="horizontal"
+        android:layout_weight="2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+		<Button 
+		    android:id="@+id/btn_linkdevice"
+		    android:background="@drawable/link"
+	        android:text="@string/btn_linkdevice"
+	        android:textSize="30sp"
+	        android:textColor="@android:color/darker_gray"
+	        android:layout_marginLeft="5dp"
+	        android:layout_marginRight="5dp"
+	        android:layout_gravity="center_horizontal"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"/>
     </LinearLayout>
-    
-    <TextView 
-        android:id="@+id/tv_ip"
-        android:text="@string/ip"
-        android:textSize="30sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <EditText 
-        android:id="@+id/et_ip"
-        android:inputType="text"
-        android:textSize="30sp"
-        android:text="@string/ipaddr"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"/>
-	<TextView 
-        android:id="@+id/tv_port"
-        android:text="@string/port"
-        android:textSize="30sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <EditText 
-        android:id="@+id/et_port"
-        android:inputType="text"
-        android:textSize="30sp"
-        android:text="@string/portVal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"/>
-	<Button 
-	    android:id="@+id/btn_linkdevice"
-        android:text="@string/btn_linkdevice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+
 </LinearLayout>

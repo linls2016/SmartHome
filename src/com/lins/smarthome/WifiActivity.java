@@ -11,7 +11,9 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo.State;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -37,10 +39,18 @@ public class WifiActivity extends Activity {
 		IP = (EditText) findViewById(R.id.et_ip);
 		Port = (EditText) findViewById(R.id.et_port);
 		linkDeviceButton = (Button) findViewById(R.id.btn_linkdevice);
-		linkDeviceButton.setOnClickListener(new View.OnClickListener() {
+		linkDeviceButton.setOnTouchListener(new OnTouchListener() {
 			@Override
-			public void onClick(View v) {
-				Link();
+			public boolean onTouch(View v, MotionEvent event) {
+				v.performClick();
+				if (event.getAction() == MotionEvent.ACTION_DOWN) {
+					linkDeviceButton.setBackgroundResource(R.drawable.link_press);
+				}
+				if (event.getAction() == MotionEvent.ACTION_UP) {
+					linkDeviceButton.setBackgroundResource(R.drawable.link);
+					Link();
+				}
+				return true;
 			}
 		});
 	}
