@@ -53,15 +53,27 @@
         	    android:id="@+id/temperature"
             	android:text="@string/tv_temperature"
             	android:textSize="40sp"
+            	android:textColor="@android:color/darker_gray"
             	android:layout_marginLeft="10dp"
             	android:layout_alignParentLeft="true"
             	android:layout_centerVertical="true"
             	android:layout_width="wrap_content"
             	android:layout_height="wrap_content"/>
+        	<TextView 
+			    android:id="@+id/o"
+            	android:text="@string/tv_o"
+            	android:textSize="20sp"
+            	android:textColor="@android:color/darker_gray"
+            	android:layout_marginRight="40dp"
+            	android:paddingBottom="15dp"
+            	android:layout_alignParentRight="true"
+            	android:layout_centerVertical="true"
+            	android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"/>
 			<TextView 
-			    android:id="@+id/c"
             	android:text="@string/tv_c"
             	android:textSize="40sp"
+            	android:textColor="@android:color/darker_gray"
             	android:layout_marginRight="10dp"
             	android:layout_alignParentRight="true"
             	android:layout_centerVertical="true"
@@ -69,7 +81,7 @@
             	android:layout_height="wrap_content"/>
         	<LinearLayout 
         	    android:layout_toRightOf="@id/temperature"
-        	    android:layout_toLeftOf="@id/c"
+        	    android:layout_toLeftOf="@id/o"
         	    android:layout_width="match_parent"
         	    android:layout_height="match_parent">
         	    <TextView 
@@ -79,15 +91,7 @@
 	            	android:layout_width="match_parent"
 	            	android:layout_height="match_parent"/>
         	</LinearLayout>
-			<TextView 
-            	android:text="@string/tv_o"
-            	android:textSize="20sp"
-            	android:layout_marginRight="40dp"
-            	android:paddingBottom="15dp"
-            	android:layout_alignParentRight="true"
-            	android:layout_centerVertical="true"
-            	android:layout_width="wrap_content"
-            	android:layout_height="wrap_content"/>
+			
         </RelativeLayout>
         <View 
             android:layout_width="wrap_content"
@@ -106,15 +110,28 @@
         	    android:id="@+id/humidity"
             	android:text="@string/tv_humidity"
             	android:textSize="40sp"
+            	android:textColor="@android:color/darker_gray"
             	android:layout_marginLeft="10dp"
             	android:layout_alignParentLeft="true"
             	android:layout_centerVertical="true"
             	android:layout_width="wrap_content"
             	android:layout_height="wrap_content"/>
 			<TextView 
-			    android:id="@+id/p"
+			    android:id="@+id/po"
+            	android:text="@string/tv_o"
+            	android:textSize="20sp"
+            	android:visibility="invisible"
+            	android:textColor="@android:color/darker_gray"
+            	android:layout_marginRight="40dp"
+            	android:paddingBottom="15dp"
+            	android:layout_alignParentRight="true"
+            	android:layout_centerVertical="true"
+            	android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"/>
+			<TextView 
             	android:text="@string/tv_p"
             	android:textSize="40sp"
+            	android:textColor="@android:color/darker_gray"
             	android:layout_marginRight="10dp"
             	android:layout_alignParentRight="true"
             	android:layout_centerVertical="true"
@@ -122,7 +139,7 @@
             	android:layout_height="wrap_content"/>
         	<LinearLayout 
         	    android:layout_toRightOf="@id/humidity"
-        	    android:layout_toLeftOf="@id/p"
+        	    android:layout_toLeftOf="@id/po"
         	    android:layout_width="match_parent"
         	    android:layout_height="match_parent">
         	    <TextView 

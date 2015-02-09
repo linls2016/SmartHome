@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <TextView 
+        android:text="@string/tv_add_lights"
+        android:textSize="25sp"
+        android:textColor="@android:color/holo_blue_light"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <View 
+        android:background="@android:color/holo_blue_light"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"/>
+    
+    <RelativeLayout 
+        android:id="@+id/rl_add_light_start"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+    	<TextView 
+	        android:text="@string/tv_add_light_start"
+	        android:textSize="30sp"
+	        android:layout_marginLeft="10dp"
+	        android:layout_centerVertical="true"
+    	    android:layout_alignParentLeft="true"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"/>
+    	<TextView 
+    	    android:id="@+id/tv_add_light_start"
+    	    android:text="@string/tv_add_light_start_value"
+    	    android:textSize="30sp"
+    	    android:layout_marginRight="10dp"
+    	    android:layout_centerVertical="true"
+    	    android:layout_alignParentRight="true"
+    	    android:layout_width="wrap_content"
+    	    android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+    <View 
+        android:background="@android:color/darker_gray"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"/>
+    
+    <RelativeLayout 
+        android:id="@+id/rl_add_light_stop"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+    	<TextView 
+	        android:text="@string/tv_add_light_stop"
+	        android:textSize="30sp"
+	        android:layout_marginLeft="10dp"
+	        android:layout_centerVertical="true"
+    	    android:layout_alignParentLeft="true"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"/>
+    	<TextView
+    	    android:id="@+id/tv_add_light_stop"
+    	    android:text="@string/tv_add_light_stop_value"
+    	    android:textSize="30sp"
+    	    android:layout_marginRight="10dp"
+    	    android:layout_centerVertical="true"
+    	    android:layout_alignParentRight="true"
+    	    android:layout_width="wrap_content"
+    	    android:layout_height="wrap_content"/>
+    </RelativeLayout>
+    
+	<View 
+        android:background="@android:color/holo_blue_light"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"/>
+	<RelativeLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="50dp">
+		<View 
+		    android:id="@+id/light_add_view"
+	        android:background="@android:color/holo_blue_light"
+	        android:layout_centerInParent="true"
+	        android:layout_width="2dp"
+	        android:layout_height="match_parent"/>
+	    <TextView 
+	        android:id="@+id/tv_add_light_ensure"
+	        android:text="@string/tv_add_light_ensure"
+	        android:textSize="20sp"
+	        android:gravity="center"
+	        android:layout_toLeftOf="@id/light_add_view"
+	        android:layout_alignParentLeft="true"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"/>
+		<TextView 
+		    android:id="@+id/tv_add_light_cancle"
+	        android:text="@string/tv_add_light_cancle"
+	        android:textSize="20sp"
+	        android:gravity="center"
+	        android:layout_toRightOf="@id/light_add_view"
+	        android:layout_alignParentRight="true"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"/>
+	</RelativeLayout>
+    
+</LinearLayout>

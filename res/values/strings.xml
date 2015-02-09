@@ -28,6 +28,22 @@
     <string name="tv_c">C</string>
     <string name="tv_p">%</string>
     <string name="tv_humidity">湿度：</string>
-    <string name="voice_info">LinLiangsheng</string>
+    <string name="voice_info">按住说话</string>
+    <string name="main_light">灯</string>
+    <string name="main_socket">插</string>
+    <string name="main_light_info">灯泡控制</string>
+    <string name="main_socket_info">插座控制</string>
+    <string name="main_environment">环</string>
+    <string name="main_security">安</string>
+    <string name="main_environment_info">环境监测</string>
+    <string name="main_security_info">安防报警</string>
+    <string name="tv_add_lights">添加开关时段</string>
+    <string name="tv_add_securities">添加安防时段</string>
+    <string name="tv_add_light_start">开启时间</string>
+    <string name="tv_add_light_start_value">21:00</string>
+    <string name="tv_add_light_stop">关闭时间</string>
+    <string name="tv_add_light_stop_value">09:00</string>
+    <string name="tv_add_light_ensure">确定</string>
+    <string name="tv_add_light_cancle">取消</string>
 
 </resources>

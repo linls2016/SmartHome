@@ -2,18 +2,19 @@ package com.lins.smarthome;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
 	private Intent intent;
 	
-	private ImageView Light,Socket,Environment,Security;
+	private TextView Light,Socket,Environment,Security;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -23,10 +24,14 @@ public class MainActivity extends Activity {
 	}
 	
 	private void initView() {
-		Light = (ImageView) findViewById(R.id.iv_main_light);
-		Socket = (ImageView) findViewById(R.id.iv_main_socket);
-		Environment = (ImageView) findViewById(R.id.iv_main_environment);
-		Security = (ImageView) findViewById(R.id.iv_main_security);
+		Light = (TextView) findViewById(R.id.main_light);
+		Socket = (TextView) findViewById(R.id.main_socket);
+		Environment = (TextView) findViewById(R.id.main_environment);
+		Security = (TextView) findViewById(R.id.main_security);
+		Light.setTextColor(Color.GRAY);
+		Socket.setTextColor(Color.GRAY);
+		Environment.setTextColor(Color.GRAY);
+		Security.setTextColor(Color.GRAY);
 		Light.setOnTouchListener(new Touch());
 		Socket.setOnTouchListener(new Touch());
 		Environment.setOnTouchListener(new Touch());
@@ -38,35 +43,47 @@ public class MainActivity extends Activity {
 		public boolean onTouch(View v, MotionEvent event) {
 			v.performClick();
 			switch (v.getId()) {
-			case R.id.iv_main_light:
+			case R.id.main_light:
 				if (event.getAction() == MotionEvent.ACTION_DOWN) {
-					
+					Light.setBackgroundResource(R.drawable.main_bg_pressed);
+					Light.setTextColor(Color.WHITE);
 				}
 				if (event.getAction() == MotionEvent.ACTION_UP) {
+					Light.setBackgroundResource(R.drawable.main_bg);
+					Light.setTextColor(Color.GRAY);
 					onLight();
 				}
 				break;
-			case R.id.iv_main_socket:
+			case R.id.main_socket:
 				if (event.getAction() == MotionEvent.ACTION_DOWN) {
-					
+					Socket.setBackgroundResource(R.drawable.main_bg_pressed);
+					Socket.setTextColor(Color.WHITE);
 				}
 				if (event.getAction() == MotionEvent.ACTION_UP) {
+					Socket.setBackgroundResource(R.drawable.main_bg);
+					Socket.setTextColor(Color.GRAY);
 					onSocket();
 				}
 				break;
-			case R.id.iv_main_environment:
+			case R.id.main_environment:
 				if (event.getAction() == MotionEvent.ACTION_DOWN) {
-					
+					Environment.setBackgroundResource(R.drawable.main_bg_pressed);
+					Environment.setTextColor(Color.WHITE);
 				}
 				if (event.getAction() == MotionEvent.ACTION_UP) {
+					Environment.setBackgroundResource(R.drawable.main_bg);
+					Environment.setTextColor(Color.GRAY);
 					onEnvironment();
 				}
 				break;
-			case R.id.iv_main_security:
+			case R.id.main_security:
 				if (event.getAction() == MotionEvent.ACTION_DOWN) {
-					
+					Security.setBackgroundResource(R.drawable.main_bg_pressed);
+					Security.setTextColor(Color.WHITE);
 				}
 				if (event.getAction() == MotionEvent.ACTION_UP) {
+					Security.setBackgroundResource(R.drawable.main_bg);
+					Security.setTextColor(Color.GRAY);
 					onSecurity();
 				}
 				break;

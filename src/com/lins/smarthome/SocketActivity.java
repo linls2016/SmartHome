@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.widget.ImageView;
 
@@ -33,32 +32,44 @@ public class SocketActivity extends Activity {
 		socket = (ImageView) findViewById(R.id.socket);
 		sk = new Socket();
 		if (sk.checkStatus()) {
-			socket.setImageResource(R.drawable.common_button_on);
+			socket.setImageResource(R.drawable.on);
 			key = true;
 		} else {
-			socket.setImageResource(R.drawable.common_button_off);
+			socket.setImageResource(R.drawable.off);
 			key = false;
 		}
-		socket.setOnClickListener(new SocketOnOff());
+		socket.setOnTouchListener(new SocketOnOff());
 	}
 
 	/**
 	 * 插座开关
 	 */
-	private class SocketOnOff implements OnClickListener {
+	private class SocketOnOff implements OnTouchListener {
 		@Override
-		public void onClick(View v) {
+		public boolean onTouch(View v, MotionEvent event) {
+			v.performClick();
 			if (!key) {
-				sk.setSocketOn();
-				socket.setImageResource(R.drawable.common_button_on);
-				new Player(SocketActivity.this, R.raw.socket_open).play();
-				key = true;
+				if (event.getAction() == MotionEvent.ACTION_DOWN) {
+//					socket.setImageResource(R.drawable.on_pressed);
+				}
+				if (event.getAction() == MotionEvent.ACTION_UP) {
+					sk.setSocketOn();
+					socket.setImageResource(R.drawable.on);
+					new Player(SocketActivity.this, R.raw.socket_open).play();
+					key = true;
+				}
 			} else {
-				sk.setSocketOff();
-				socket.setImageResource(R.drawable.common_button_off);
-				new Player(SocketActivity.this, R.raw.socket_close).play();
-				key = false;
+				if (event.getAction() == MotionEvent.ACTION_DOWN) {
+//					socket.setImageResource(R.drawable.off_pressed);
+				}
+				if (event.getAction() == MotionEvent.ACTION_UP) {
+					sk.setSocketOff();
+					socket.setImageResource(R.drawable.off);
+					new Player(SocketActivity.this, R.raw.socket_close).play();
+					key = false;
+				}
 			}
+			return true;
 		}
 	}
 	

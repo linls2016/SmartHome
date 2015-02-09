@@ -36,7 +36,7 @@
 		</activity>
 		<activity
         	android:name="com.lins.smarthome.LightActivity" 
-        	android:theme="@android:style/Theme.Light.NoTitleBar" >
+        	android:theme="@android:style/Theme.Holo.Light.NoActionBar" >
 		</activity>
         <activity
         	android:name="com.lins.smarthome.SocketActivity" 

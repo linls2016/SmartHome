@@ -7,6 +7,7 @@ package com.lins.smarthome;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo.State;
 import android.os.Bundle;
@@ -45,6 +46,7 @@ public class WifiActivity extends Activity {
 				v.performClick();
 				if (event.getAction() == MotionEvent.ACTION_DOWN) {
 					linkDeviceButton.setBackgroundResource(R.drawable.link_press);
+					linkDeviceButton.setTextColor(Color.BLACK);
 				}
 				if (event.getAction() == MotionEvent.ACTION_UP) {
 					linkDeviceButton.setBackgroundResource(R.drawable.link);

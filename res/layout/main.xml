@@ -33,56 +33,91 @@
 	<!-- 主菜单栏 -->
 	<LinearLayout
 	    android:orientation="vertical"
-	    android:layout_margin="10dp"
 	    android:layout_weight="3"
 	    android:layout_width="match_parent"
 	    android:layout_height="0dp">
-        
-	    <LinearLayout 
-	        android:orientation="vertical"
-	        android:layout_width="match_parent"
-	        android:layout_height="match_parent">
-	    <LinearLayout 
-	        android:orientation="horizontal"
-	        android:layout_weight="1"
-	        android:layout_width="match_parent"
-	        android:layout_height="0dp">
-			<ImageView 
-		        android:id="@+id/iv_main_light"
-		        android:contentDescription="@string/contentDescription"
-		        android:src="@drawable/main_light"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"/>
-	    	<ImageView 
-				android:id="@+id/iv_main_socket"
-				android:contentDescription="@string/contentDescription"
-		        android:src="@drawable/main_socket"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"/>
-	    </LinearLayout>
-	    
-	    <LinearLayout 
-	        android:orientation="horizontal"
-	        android:layout_weight="1"
-	        android:layout_width="match_parent"
-	        android:layout_height="0dp">
-			<ImageView 
-		        android:id="@+id/iv_main_environment"
-		        android:contentDescription="@string/contentDescription"
-		        android:src="@drawable/main_environment"
-		        android:layout_weight="1"
-		        android:layout_width="0dp"
-		        android:layout_height="wrap_content"/>
-	    	<ImageView 
-				android:id="@+id/iv_main_security"
-		        android:contentDescription="@string/contentDescription"
-		        android:src="@drawable/main_security"
-		        android:layout_weight="1"
-		        android:layout_width="0dp"
-		        android:layout_height="wrap_content"/>
-	    </LinearLayout>
-	    
-	    </LinearLayout>
+        <TableLayout
+            android:shrinkColumns="0,1"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TableRow >
+	            <TextView 
+	                android:id="@+id/main_light"
+	                android:text="@string/main_light"
+	                android:background="@drawable/main_bg"
+	                android:gravity="center"
+	                android:textSize="45sp"
+	                android:layout_margin="20dp"
+	                android:layout_width="300dp"
+	                android:layout_height="wrap_content"/>
+	            <TextView 
+	                android:id="@+id/main_socket"
+	                android:text="@string/main_socket"
+	                android:background="@drawable/main_bg"
+	                android:gravity="center"
+	                android:textSize="45sp"
+	                android:layout_margin="20dp"
+	                android:layout_width="300dp"
+	                android:layout_height="wrap_content"/>
+            </TableRow>
+			<TableRow >
+	            <TextView 
+	                android:text="@string/main_light_info"
+	                android:gravity="center"
+	                android:textSize="15sp"
+	                android:layout_marginTop="3dp"
+	                android:layout_marginBottom="3dp"
+	                android:layout_width="300dp"
+	                android:layout_height="wrap_content"/>
+	            <TextView 
+	                android:text="@string/main_socket_info"
+	                android:gravity="center"
+	                android:textSize="15sp"
+	                android:layout_marginTop="3dp"
+	                android:layout_marginBottom="3dp"
+	                android:layout_width="300dp"
+	                android:layout_height="wrap_content"/>
+            </TableRow>
+            <TableRow >
+	            <TextView 
+	                android:id="@+id/main_security"
+	                android:text="@string/main_security"
+	                android:background="@drawable/main_bg"
+	                android:gravity="center"
+	                android:textSize="45sp"
+	                android:layout_margin="20dp"
+	                android:layout_width="300dp"
+	                android:layout_height="wrap_content"/>
+	            <TextView 
+	                android:id="@+id/main_environment"
+	                android:text="@string/main_environment"
+	                android:background="@drawable/main_bg"
+	                android:gravity="center"
+	                android:textSize="45sp"
+	                android:layout_margin="20dp"
+	                android:layout_width="300dp"
+	                android:layout_height="wrap_content"/>
+            </TableRow>
+            <TableRow >
+	            <TextView 
+	                android:text="@string/main_security_info"
+	                android:gravity="center"
+	                android:textSize="15sp"
+	                android:layout_marginTop="3dp"
+	                android:layout_marginBottom="3dp"
+	                android:layout_width="300dp"
+	                android:layout_height="wrap_content"/>
+	            <TextView 
+	                android:text="@string/main_environment_info"
+	                android:gravity="center"
+	                android:textSize="15sp"
+	                android:layout_marginTop="3dp"
+	                android:layout_marginBottom="3dp"
+	                android:layout_width="300dp"
+	                android:layout_height="wrap_content"/>
+            </TableRow>
+        </TableLayout>
 	    <View 
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"/>
@@ -114,7 +149,7 @@
 		    	android:background="@drawable/voice_info"
 		    	android:layout_toRightOf="@id/voice"
 		    	android:layout_centerVertical="true"
-		    	android:layout_width="wrap_content"
+		    	android:layout_width="match_parent"
 				android:layout_height="wrap_content" />
 	    </RelativeLayout>
 		<View 
