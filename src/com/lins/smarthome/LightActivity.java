@@ -11,8 +11,11 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -56,6 +59,7 @@ public class LightActivity extends Activity {
 		initView();															//初始化UI控件
 		initListView();
 		back();																	//返回主菜单的处理
+		readLightTimeList();
 	}
 	
 	/**
@@ -129,25 +133,76 @@ public class LightActivity extends Activity {
 		});
 	}
 	
-	private void deleteLightTime(int position) {
-		listItems.remove(listViewAdapter.getItem(position));
-		listViewAdapter.notifyDataSetChanged();
-	}
-	
 	private void addLightTime(String startTime,String stopTime) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("start_time_value", startTime);
 		map.put("stop_time_value", stopTime);
+		map.put("start_stop_image", "stop");
 		listItems.add(map);
 		light_time_lists.setAdapter(listViewAdapter);
+		saveLightTimeList();
+	}
+	
+	private void deleteLightTime(int position) {
+		listItems.remove(listViewAdapter.getItem(position));
+		listViewAdapter.notifyDataSetChanged();
+		saveLightTimeList();
+		listViewAdapter.setLightTime();
 	}
 	
 	private void updateLightTime(int position,String startTime,String stopTime) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("start_time_value", startTime);
 		map.put("stop_time_value", stopTime);
+		map.put("start_stop_image", "stop");
 		listItems.set(position, map);
 		light_time_lists.setAdapter(listViewAdapter);
+		saveLightTimeList();
+		listViewAdapter.setLightTime();
+	}
+	
+	private static final String KEY_LIGHT_TIME_LIST = "LightTime";
+	
+	private void readLightTimeList() {
+		SharedPreferences sp = getSharedPreferences("LinLiangsheng", Context.MODE_PRIVATE);
+		String content = sp.getString(KEY_LIGHT_TIME_LIST, null);
+		if (content != null) {
+			String[] timeStrings = content.split("!");
+			for (String string : timeStrings) {
+				int startTimeStart = string.indexOf("start_time_value")+17;
+				int startTimeStop = string.indexOf("start_time_value")+22;
+				String startTime = string.substring(startTimeStart, startTimeStop);
+				int stopTimeStart = string.indexOf("stop_time_value")+16;
+				int stopTimeStop = string.indexOf("stop_time_value")+21;
+				String stopTime = string.substring(stopTimeStart, stopTimeStop);
+				int imageStart = string.indexOf("start_stop_image")+17;
+				int imageStop = string.indexOf("start_stop_image")+21;
+				String imageTime = string.substring(imageStart, imageStop);
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("start_time_value", startTime);
+				map.put("stop_time_value", stopTime);
+				map.put("start_stop_image", imageTime);
+				listItems.add(map);
+				light_time_lists.setAdapter(listViewAdapter);
+				listViewAdapter.notifyDataSetChanged();
+			}
+		}
+	}
+	
+	private void saveLightTimeList() {
+		Editor editor = getSharedPreferences("LinLiangsheng", Context.MODE_PRIVATE).edit();
+		StringBuffer sb = new StringBuffer();
+		for (int i = 0; i < listViewAdapter.getCount(); i++) {
+			sb.append(listViewAdapter.getItem(i)).append("!");
+		}
+		if (sb.length() > 1) {
+			String content = sb.substring(0, sb.length()-1);
+			editor.putString(KEY_LIGHT_TIME_LIST, content);
+			System.out.println(content);
+		} else {
+			editor.putString(KEY_LIGHT_TIME_LIST, null);
+		}
+		editor.commit();
 	}
 	
 	/**

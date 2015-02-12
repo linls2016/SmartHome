@@ -3,8 +3,9 @@ package com.lins.smarthome;
 import java.util.List;
 import java.util.Map;
 
-import android.app.AlertDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,7 +20,7 @@ public class ListViewAdapter extends BaseAdapter {
 	private List<Map<String, Object>> listItems;
 	private LayoutInflater listContainer;
 	private boolean[] hasChecked;
-
+	
 	public final class ListItemView {
 		public TextView start_time_value;
 		public TextView stop_time_value;
@@ -31,7 +32,7 @@ public class ListViewAdapter extends BaseAdapter {
 		this.context = context;
 		this.listItems = listItems;
 		listContainer = LayoutInflater.from(context);
-		hasChecked = new boolean[getCount()];
+		hasChecked = new boolean[1000];
 	}
 
 	@Override
@@ -48,34 +49,23 @@ public class ListViewAdapter extends BaseAdapter {
 	public long getItemId(int position) {
 		return 0;
 	}
-
-	/**
-	 * 记录点选了哪个
-	 * @param checkedID
-	 */
-	private void checkedOnClick(int checkedID) {
-		hasChecked[checkedID] = !hasChecked[checkedID];
-	}
+	
+//	public void setHasChecked(int position) {
+//		if ("start".equals((String) listItems.get(position).get("start_stop_image"))) {
+//			hasChecked[position] = true;
+//		}
+//		if ("stop".equals((String) listItems.get(position).get("start_stop_image"))) {
+//			hasChecked[position] = false;
+//		}
+//	}
 	
 	/**  
      * 判断是否选择  
      * @param checkedID 序号  
      * @return 返回是否选中状态  
      */  
-    public boolean hasChecked(int checkedID) {   
-        return hasChecked[checkedID];   
-    }
-	
-    /**  
-     * 显示详情  
-     * @param clickID  
-     */  
-    private void showDetailInfo(int clickID) {   
-        new AlertDialog.Builder(context)   
-        .setTitle("物品详情：" + listItems.get(clickID).get("info"))   
-        .setMessage(listItems.get(clickID).get("detail").toString())                 
-        .setPositiveButton("确定", null)   
-        .show();   
+    public boolean hasChecked(int position) {
+        return hasChecked[position];   
     }
 	
 	@Override
@@ -93,19 +83,98 @@ public class ListViewAdapter extends BaseAdapter {
 		}
 		listItemView.start_time_value.setText((String) listItems.get(position).get("start_time_value"));
 		listItemView.stop_time_value.setText((String) listItems.get(position).get("stop_time_value"));
+//		SharedPreferences sp = context.getSharedPreferences("LinLiangsheng", Context.MODE_PRIVATE);
+//		String content = sp.getString(KEY_LIGHT_TIME_LIST, null);
+//		if (content != null) {
+//			String[] timeStrings = content.split("!");
+//			for (String string : timeStrings) {
+//				int imageStart = string.indexOf("start_stop_image")+17;
+//				int imageStop = string.indexOf("start_stop_image")+21;
+//				String imageTime = string.substring(imageStart, imageStop);
+//				if ("star".equals(imageTime)) {
+//					listItemView.iv_light_switch.setImageResource(R.drawable.settings_on);
+//				}
+//				if ("stop".equals(imageTime)) {
+//					listItemView.iv_light_switch.setImageResource(R.drawable.settings_off);
+//				}
+//			}
+//		}
+		if ("star".equals((String) listItems.get(position).get("start_stop_image"))) {
+			listItemView.iv_light_switch.setImageResource(R.drawable.settings_on);
+		}
+		if ("stop".equals((String) listItems.get(position).get("start_stop_image"))) {
+			listItemView.iv_light_switch.setImageResource(R.drawable.settings_off);
+		}
 		listItemView.iv_light_switch.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-//				listItemView.iv_light_switch.setImageResource(R.drawable.settings_on);
-//				listItemView.iv_light_switch.setImageResource(R.drawable.settings_on);
-//				checkedOnClick(position);
-//				System.out.println(hasChecked(position));
-				String start = (String) listItemView.start_time_value.getText();
-				String stop = (String) listItemView.stop_time_value.getText();
-				System.out.println("START:"+start + ",STOP:" + stop);
+				if (hasChecked(position) == true) {
+					listItemView.iv_light_switch.setImageResource(R.drawable.settings_off);
+					hasChecked[position] = false;
+					listItems.get(position).put("start_stop_image", "stop");
+					Editor editor = context.getSharedPreferences("LinLiangsheng", Context.MODE_PRIVATE).edit();
+					StringBuffer sb = new StringBuffer();
+					for (int i = 0; i < getCount(); i++) {
+						sb.append(getItem(i)).append("!");
+					}
+					if (sb.length() > 1) {
+						String content = sb.substring(0, sb.length()-1);
+						editor.putString(KEY_LIGHT_TIME_LIST, content);
+						System.out.println(content);
+					} else {
+						editor.putString(KEY_LIGHT_TIME_LIST, null);
+					}
+					editor.commit();
+				} else {
+					listItemView.iv_light_switch.setImageResource(R.drawable.settings_on);
+					hasChecked[position] = true;
+					listItems.get(position).put("start_stop_image", "star");
+					Editor editor = context.getSharedPreferences("LinLiangsheng", Context.MODE_PRIVATE).edit();
+					StringBuffer sb = new StringBuffer();
+					for (int i = 0; i < getCount(); i++) {
+						sb.append(getItem(i)).append("!");
+					}
+					if (sb.length() > 1) {
+						String content = sb.substring(0, sb.length()-1);
+						editor.putString(KEY_LIGHT_TIME_LIST, content);
+						System.out.println(content);
+					} else {
+						editor.putString(KEY_LIGHT_TIME_LIST, null);
+					}
+					editor.commit();
+				}
+//				String start = (String) listItemView.start_time_value.getText();
+//				String stop = (String) listItemView.stop_time_value.getText();
+//				System.out.println("START:"+start + ",STOP:" + stop);
+				setLightTime();
 			}
 		});
 		return convertView;
+	}
+	
+	private static final String KEY_LIGHT_TIME_LIST = "LightTime";
+	public void setLightTime() {
+		StringBuffer all = new StringBuffer();
+		SharedPreferences sp = context.getSharedPreferences("LinLiangsheng", Context.MODE_PRIVATE);
+		String content = sp.getString(KEY_LIGHT_TIME_LIST, null);
+		if (content != null) {
+			String[] timeStrings = content.split("!");
+			for (String string : timeStrings) {
+				int startTimeStart = string.indexOf("start_time_value")+17;
+				int startTimeStop = string.indexOf("start_time_value")+22;
+				String startTime = string.substring(startTimeStart, startTimeStop);
+				int stopTimeStart = string.indexOf("stop_time_value")+16;
+				int stopTimeStop = string.indexOf("stop_time_value")+21;
+				String stopTime = string.substring(stopTimeStart, stopTimeStop);
+				int imageStart = string.indexOf("start_stop_image")+17;
+				int imageStop = string.indexOf("start_stop_image")+21;
+				String imageTime = string.substring(imageStart, imageStop);
+				if ("star".equals(imageTime)) {
+					all.append("!").append(startTime).append("|").append(stopTime).append("?");
+				}
+			}
+			System.out.println(all);
+		}
 	}
 	
 }
