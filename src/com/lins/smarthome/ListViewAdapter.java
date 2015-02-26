@@ -73,7 +73,7 @@ public class ListViewAdapter extends BaseAdapter {
 		final ListItemView listItemView;
 		if (convertView == null) {
 			listItemView = new ListItemView();
-			convertView = listContainer.inflate(R.layout.list_items, null);
+			convertView = listContainer.inflate(R.layout.list_items, parent,false);
 			listItemView.start_time_value = (TextView) convertView.findViewById(R.id.start_time_value);
 			listItemView.stop_time_value = (TextView) convertView.findViewById(R.id.stop_time_value);
 			listItemView.iv_light_switch = (ImageView) convertView.findViewById(R.id.iv_light_switch);

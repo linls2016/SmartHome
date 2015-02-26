@@ -13,10 +13,14 @@ public class EnvironmentActivity extends Activity {
 
 	private ImageView backup;
 	
+	private LinkWifi wifi;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.environment);
+		wifi = LinkWifi.getInstance();
+		wifi.sendMsg("ENINZ");
 		back();
 	}
 	
@@ -54,6 +58,7 @@ public class EnvironmentActivity extends Activity {
 	 * 返回的处理函数
 	 */
 	private void intentBack() {
+		wifi.sendMsg("BACKZ");
 		Intent intent = new Intent(EnvironmentActivity.this, MainActivity.class);
 		startActivity(intent);
 		finish();
