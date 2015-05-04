@@ -85,6 +85,7 @@
         	    android:layout_width="match_parent"
         	    android:layout_height="match_parent">
         	    <TextView 
+        	        android:id="@+id/tv_temperature"
 	            	android:text="@string/tv_temperature_value"
 	            	android:textSize="80sp"
 	            	android:gravity="center"
@@ -143,6 +144,7 @@
         	    android:layout_width="match_parent"
         	    android:layout_height="match_parent">
         	    <TextView 
+        	        android:id="@+id/tv_humidity"
 	            	android:text="@string/tv_temperature_value"
 	            	android:textSize="80sp"
 	            	android:gravity="center"

@@ -48,7 +48,7 @@
 		</activity>
 		<activity
         	android:name="com.lins.smarthome.SecurityActivity" 
-        	android:theme="@android:style/Theme.Light.NoTitleBar" >
+        	android:theme="@android:style/Theme.Holo.Light.NoActionBar" >
 		</activity>
     </application>
 

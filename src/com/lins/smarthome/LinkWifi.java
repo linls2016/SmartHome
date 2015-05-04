@@ -108,7 +108,7 @@ public class LinkWifi {
 				try {
 					BufferedReader buffer = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 					receiveMsg = buffer.readLine();
-					System.out.println(receiveMsg);
+					System.out.println(Integer.toHexString(receiveMsg.charAt(0)));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}

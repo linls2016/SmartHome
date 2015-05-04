@@ -15,7 +15,7 @@
     <string name="btn_linkdevice">连接设备</string>
     <string name="tv_securitysetting">报警时段设置</string>
     <string name="tv_title_security">安防报警</string>
-    <string name="tv_title_light">灯光控制</string>
+    <string name="tv_title_light">灯泡控制</string>
     <string name="tv_title_environment">环境监测</string>
     <string name="tv_title_socket">插座控制</string>
     <string name="tv_title_app">智能家居</string>
@@ -23,7 +23,7 @@
     <string name="tv_app_copyleft">林亮生 CopyLeft@2015 Lins</string>
     <string name="tv_security_info">开始时间 21:00 -- 结束时间 07:00</string>
     <string name="tv_temperature">温度：</string>
-    <string name="tv_temperature_value">56</string>
+    <string name="tv_temperature_value">0</string>
     <string name="tv_o">O</string>
     <string name="tv_c">C</string>
     <string name="tv_p">%</string>
@@ -45,5 +45,12 @@
     <string name="tv_add_light_stop_value">09:00</string>
     <string name="tv_add_light_ensure">确定</string>
     <string name="tv_add_light_cancle">取消</string>
+    <string name="tv_add_security">添加安防时段</string>
+    <string name="tv_add_security_start">开启时间</string>
+    <string name="tv_add_security_start_value">21:00</string>
+    <string name="tv_add_security_stop">关闭时间</string>
+    <string name="tv_add_security_stop_value">09:00</string>
+    <string name="tv_add_security_ensure">确定</string>
+    <string name="tv_add_security_cancle">取消</string>
 
 </resources>
