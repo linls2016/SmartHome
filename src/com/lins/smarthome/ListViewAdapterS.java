@@ -14,7 +14,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class ListViewAdapter extends BaseAdapter {
+public class ListViewAdapterS extends BaseAdapter {
 
 	private LinkWifi wifi;
 	
@@ -26,10 +26,10 @@ public class ListViewAdapter extends BaseAdapter {
 	public final class ListItemView {
 		public TextView start_time_value;
 		public TextView stop_time_value;
-		public ImageView iv_light_switch;
+		public ImageView iv_security_switch;
 	}
 	
-	public ListViewAdapter(Context context, List<Map<String, Object>> listItems) {
+	public ListViewAdapterS(Context context, List<Map<String, Object>> listItems) {
 		super();
 		this.context = context;
 		this.listItems = listItems;
@@ -76,10 +76,10 @@ public class ListViewAdapter extends BaseAdapter {
 		final ListItemView listItemView;
 		if (convertView == null) {
 			listItemView = new ListItemView();
-			convertView = listContainer.inflate(R.layout.list_items, parent,false);
+			convertView = listContainer.inflate(R.layout.list_items_s, parent,false);
 			listItemView.start_time_value = (TextView) convertView.findViewById(R.id.start_time_value);
 			listItemView.stop_time_value = (TextView) convertView.findViewById(R.id.stop_time_value);
-			listItemView.iv_light_switch = (ImageView) convertView.findViewById(R.id.iv_light_switch);
+			listItemView.iv_security_switch = (ImageView) convertView.findViewById(R.id.iv_security_switch);
 			convertView.setTag(listItemView);
 		} else {
 			listItemView = (ListItemView) convertView.getTag();
@@ -103,7 +103,7 @@ public class ListViewAdapter extends BaseAdapter {
 //			}
 //		}
 		if ("star".equals((String) listItems.get(position).get("start_stop_image"))) {
-			listItemView.iv_light_switch.setImageResource(R.drawable.settings_on);
+			listItemView.iv_security_switch.setImageResource(R.drawable.settings_on);
 			String DS1302_StartTime = (String) listItems.get(position).get("start_time_value");
 			String DS1302_StopTime  = (String) listItems.get(position).get("stop_time_value");
 			StringBuffer start = new StringBuffer();
@@ -127,13 +127,13 @@ public class ListViewAdapter extends BaseAdapter {
 			System.out.println("关闭时间："+DS1302_StopTime);
 		}
 		if ("stop".equals((String) listItems.get(position).get("start_stop_image"))) {
-			listItemView.iv_light_switch.setImageResource(R.drawable.settings_off);
+			listItemView.iv_security_switch.setImageResource(R.drawable.settings_off);
 		}
-		listItemView.iv_light_switch.setOnClickListener(new OnClickListener() {
+		listItemView.iv_security_switch.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				if (hasChecked(position) == true) {
-					listItemView.iv_light_switch.setImageResource(R.drawable.settings_off);
+					listItemView.iv_security_switch.setImageResource(R.drawable.settings_off);
 					hasChecked[position] = false;
 					listItems.get(position).put("start_stop_image", "stop");
 					Editor editor = context.getSharedPreferences("LinLiangsheng", Context.MODE_PRIVATE).edit();
@@ -143,14 +143,14 @@ public class ListViewAdapter extends BaseAdapter {
 					}
 					if (sb.length() > 1) {
 						String content = sb.substring(0, sb.length()-1);
-						editor.putString(KEY_LIGHT_TIME_LIST, content);
+						editor.putString(KEY_SECURITY_TIME_LIST, content);
 						System.out.println(content);
 					} else {
-						editor.putString(KEY_LIGHT_TIME_LIST, null);
+						editor.putString(KEY_SECURITY_TIME_LIST, null);
 					}
 					editor.commit();
 				} else {
-					listItemView.iv_light_switch.setImageResource(R.drawable.settings_on);
+					listItemView.iv_security_switch.setImageResource(R.drawable.settings_on);
 					hasChecked[position] = true;
 					listItems.get(position).put("start_stop_image", "star");
 					Editor editor = context.getSharedPreferences("LinLiangsheng", Context.MODE_PRIVATE).edit();
@@ -160,27 +160,27 @@ public class ListViewAdapter extends BaseAdapter {
 					}
 					if (sb.length() > 1) {
 						String content = sb.substring(0, sb.length()-1);
-						editor.putString(KEY_LIGHT_TIME_LIST, content);
+						editor.putString(KEY_SECURITY_TIME_LIST, content);
 						System.out.println(content);
 					} else {
-						editor.putString(KEY_LIGHT_TIME_LIST, null);
+						editor.putString(KEY_SECURITY_TIME_LIST, null);
 					}
 					editor.commit();
 				}
 //				String start = (String) listItemView.start_time_value.getText();
 //				String stop = (String) listItemView.stop_time_value.getText();
 //				System.out.println("START:"+start + ",STOP:" + stop);
-				setLightTime();
+				setSecurityTime();
 			}
 		});
 		return convertView;
 	}
 	
-	private static final String KEY_LIGHT_TIME_LIST = "LightTime";
-	public void setLightTime() {
+	private static final String KEY_SECURITY_TIME_LIST = "SecurityTime";
+	public void setSecurityTime() {
 		StringBuffer all = new StringBuffer();
 		SharedPreferences sp = context.getSharedPreferences("LinLiangsheng", Context.MODE_PRIVATE);
-		String content = sp.getString(KEY_LIGHT_TIME_LIST, null);
+		String content = sp.getString(KEY_SECURITY_TIME_LIST, null);
 		if (content != null) {
 			String[] timeStrings = content.split("!");
 			for (String string : timeStrings) {

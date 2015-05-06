@@ -1,7 +1,9 @@
 package com.lins.smarthome;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -52,14 +54,42 @@ public class LightActivity extends Activity {
 	private boolean LightTimeKey = true;
 	private int updateID;
 	
+	private LinkWifi wifi;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.light);
+		wifi = LinkWifi.getInstance();
+		wifi.sendMsg("LIINZ");
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		initView();															//初始化UI控件
 		initListView();
 		back();																	//返回主菜单的处理
 		readLightTimeList();
+		initDSTime();
+	}
+	
+	/**
+	 * 初始化DS1302的时间
+	 */
+	private void initDSTime() {
+		Date date = new Date();
+		SimpleDateFormat SDF = new SimpleDateFormat("yyMMddHHmmss",Locale.US);
+		String mDate = SDF.format(date);
+		char temp;
+		StringBuffer myDate = new StringBuffer();
+		for (int i = 0; i < mDate.length(); i++) {
+			temp = (char) (mDate.charAt(i) - "0".charAt(0));
+			myDate.append(temp);
+		}
+		String sendTime = "K" + myDate.toString() + "Z";
+		System.out.println("发送数值："+sendTime);
+		wifi.sendMsg(sendTime);
 	}
 	
 	/**
@@ -376,6 +406,7 @@ public class LightActivity extends Activity {
 	 * 返回的处理函数
 	 */
 	private void intentBack() {
+		wifi.sendMsg("BACKZ");
 		Intent intent = new Intent(LightActivity.this, MainActivity.class);
 		startActivity(intent);
 		finish();

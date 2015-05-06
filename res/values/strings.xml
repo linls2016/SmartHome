@@ -28,7 +28,7 @@
     <string name="tv_c">C</string>
     <string name="tv_p">%</string>
     <string name="tv_humidity">湿度：</string>
-    <string name="voice_info">按住说话</string>
+    <string name="voice_info">点击图标说话</string>
     <string name="main_light">灯</string>
     <string name="main_socket">插</string>
     <string name="main_light_info">灯泡控制</string>

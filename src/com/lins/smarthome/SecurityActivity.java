@@ -79,26 +79,15 @@ public class SecurityActivity extends Activity {
 	 */
 	private void initDSTime() {
 		Date date = new Date();
-		SimpleDateFormat SDF_YY = new SimpleDateFormat("yy",Locale.US);
-		SimpleDateFormat SDF_MM = new SimpleDateFormat("MM",Locale.US);
-		SimpleDateFormat SDF_DD = new SimpleDateFormat("dd",Locale.US);
-		SimpleDateFormat SDF_HH = new SimpleDateFormat("hh",Locale.US);
-		SimpleDateFormat SDF_MI = new SimpleDateFormat("mm",Locale.US);
-		SimpleDateFormat SDF_SS = new SimpleDateFormat("ss",Locale.US);
-		String syy  = SDF_YY.format(date);
-		int yy = Integer.parseInt(syy, 16);
-		String smm  = SDF_MM.format(date);
-		int mm = Integer.parseInt(smm, 16);
-		String sdd  = SDF_DD.format(date);
-		int dd = Integer.parseInt(sdd, 16);
-		String shh  = SDF_HH.format(date);
-		int hh = Integer.parseInt(shh, 16);
-		String smi  = SDF_MI.format(date);
-		int mi = Integer.parseInt(smi, 16);
-		String sss  = SDF_SS.format(date);
-		int ss = Integer.parseInt(sss, 16);
-//		String sendTime = "K" + yy + mm + dd + hh + mi + ss + "Z";
-		String sendTime = "K" + ss + "Z";
+		SimpleDateFormat SDF = new SimpleDateFormat("yyMMddHHmmss",Locale.US);
+		String mDate = SDF.format(date);
+		char temp;
+		StringBuffer myDate = new StringBuffer();
+		for (int i = 0; i < mDate.length(); i++) {
+			temp = (char) (mDate.charAt(i) - "0".charAt(0));
+			myDate.append(temp);
+		}
+		String sendTime = "K" + myDate.toString() + "Z";
 		System.out.println("发送数值："+sendTime);
 		wifi.sendMsg(sendTime);
 	}
