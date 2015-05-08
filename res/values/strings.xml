@@ -21,7 +21,6 @@
     <string name="tv_title_app">智能家居</string>
     <string name="tv_app_version">Version 1.0.0</string>
     <string name="tv_app_copyleft">林亮生 CopyLeft@2015 Lins</string>
-    <string name="tv_security_info">开始时间 21:00 -- 结束时间 07:00</string>
     <string name="tv_temperature">温度：</string>
     <string name="tv_temperature_value">0</string>
     <string name="tv_o">O</string>

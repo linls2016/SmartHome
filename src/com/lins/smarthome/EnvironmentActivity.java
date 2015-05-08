@@ -1,5 +1,8 @@
 package com.lins.smarthome;
-
+/**
+ * @author LinLiangsheng
+ * 环境监测子界面及温湿度数据接收处理
+ */
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,14 +17,14 @@ import android.widget.TextView;
 
 public class EnvironmentActivity extends Activity {
 
-	private ImageView backup;
-	private LinkWifi wifi;
-	
+	private ImageView backup;			//返回按钮
+	private LinkWifi wifi;						//wifi对象
+
 	private TextView humidity;			//湿度
 	private TextView temperature;		//温度
-	
+
 	private boolean ifStart = true;	//控制是否退出线程对温湿度的更新
-	
+
 	private static final int RESULT = 0;
 	private Handler handler =  new Handler() {
 		@Override

@@ -1,11 +1,7 @@
 package com.lins.smarthome;
 
-import java.util.ArrayList;
-
-import com.baidu.voicerecognition.android.ui.BaiduASRDigitalDialog;
-import com.baidu.voicerecognition.android.ui.DialogRecognitionListener;
-
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -17,17 +13,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements RecognitionListener{
+	static {
+		System.loadLibrary("pocketsphinx_jni");
+	}
+
+	private RecognizerTask rec;
+	private Thread rec_thread;
+	private boolean listening;
+	private ProgressDialog rec_dialog;
 
 	private Intent intent;
-	
 	private TextView Light,Socket,Environment,Security,voiceInfo;
 	private ImageView Voice;
-	
-    private BaiduASRDigitalDialog mDialog = null;
-    private DialogRecognitionListener mRecognitionListener;
-    private int mCurrentTheme = Config.DIALOG_THEME;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -48,22 +47,18 @@ public class MainActivity extends Activity {
 		Socket.setOnTouchListener(new Touch());
 		Environment.setOnTouchListener(new Touch());
 		Security.setOnTouchListener(new Touch());
-		
+
+		this.rec = new RecognizerTask();
+		this.rec_thread = new Thread(this.rec);
+		this.listening = false;
 		Voice = (ImageView) findViewById(R.id.voice);
-		Voice.setOnClickListener(new Voice());
+		Voice.setOnTouchListener(new Touch());
 		voiceInfo = (TextView) findViewById(R.id.voice_info);
-        mRecognitionListener = new DialogRecognitionListener() {
-            @Override
-            public void onResults(Bundle results) {
-                ArrayList<String> rs = results != null ? results
-                        .getStringArrayList(RESULTS_RECOGNITION) : null;
-                if (rs != null && rs.size() > 0) {
-                	voiceInfo.setText(rs.get(0).substring(0, rs.get(0).length()-1));
-                }
-            }
-        };
+		voiceInfo.setText("按住图标说话");
+		this.rec.setRecognitionListener(this);
+		this.rec_thread.start();
 	}
-	
+
 	private class Touch implements View.OnTouchListener {
 		@Override
 		public boolean onTouch(View v, MotionEvent event) {
@@ -113,13 +108,30 @@ public class MainActivity extends Activity {
 					onSecurity();
 				}
 				break;
+			case R.id.voice:
+				if (event.getAction() == MotionEvent.ACTION_DOWN) {
+					MainActivity.this.listening = true;
+					MainActivity.this.rec.start();
+					break;
+				}
+				if (event.getAction() == MotionEvent.ACTION_UP) {
+					if (MainActivity.this.listening) {
+						Log.d(getClass().getName(), "Showing Dialog");
+						MainActivity.this.rec_dialog = ProgressDialog.show(MainActivity.this, "", "Recognizing speech...", true);
+						MainActivity.this.rec_dialog.setCancelable(false);
+						MainActivity.this.listening = false;
+					}
+					MainActivity.this.rec.stop();
+					break;
+				}
+				break;
 			default:
 				break;
 			}
 			return true;
 		}
 	}
-	
+
 	private void onLight() {
 		intent = new Intent(MainActivity.this, LightActivity.class);
 		startActivity(intent);
@@ -147,7 +159,7 @@ public class MainActivity extends Activity {
 		finish();
 		overridePendingTransition(R.anim.menu_in, R.anim.menu_out);		//动画
 	}
-	
+
 	private long exitTime = 0;
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -163,38 +175,39 @@ public class MainActivity extends Activity {
 		}
 		return super.onKeyDown(keyCode, event);
 	}
-	
-	private class Voice implements View.OnClickListener {
-		@Override
-		public void onClick(View v) {
-			voiceInfo.setText(null);
-            mCurrentTheme = Config.DIALOG_THEME;
-            if (mDialog != null) {
-                mDialog.dismiss();
-            }
-            Bundle params = new Bundle();
-            params.putString(BaiduASRDigitalDialog.PARAM_API_KEY, Constants.API_KEY);
-            params.putString(BaiduASRDigitalDialog.PARAM_SECRET_KEY, Constants.SECRET_KEY);
-            params.putInt(BaiduASRDigitalDialog.PARAM_DIALOG_THEME, Config.DIALOG_THEME);
-            mDialog = new BaiduASRDigitalDialog(MainActivity.this, params);
-            mDialog.setDialogRecognitionListener(mRecognitionListener);
-            mDialog.getParams().putInt(BaiduASRDigitalDialog.PARAM_PROP, Config.CURRENT_PROP);
-            mDialog.getParams().putString(BaiduASRDigitalDialog.PARAM_LANGUAGE,
-                    Config.getCurrentLanguage());
-            Log.e("DEBUG", "Config.PLAY_START_SOUND = "+Config.PLAY_START_SOUND);
-            mDialog.getParams().putBoolean(BaiduASRDigitalDialog.PARAM_START_TONE_ENABLE, Config.PLAY_START_SOUND);
-            mDialog.getParams().putBoolean(BaiduASRDigitalDialog.PARAM_END_TONE_ENABLE, Config.PLAY_END_SOUND);
-            mDialog.getParams().putBoolean(BaiduASRDigitalDialog.PARAM_TIPS_TONE_ENABLE, Config.DIALOG_TIPS_SOUND);
-            mDialog.show();
-		}
+
+	@Override
+	public void onPartialResults(Bundle b) {
+//		final MainActivity that = this;
+//		final String hyp = b.getString("hyp");
+//		that.voiceInfo.post(new Runnable() {
+//			public void run() {
+//				that.voiceInfo.setText(hyp);
+//			}
+//		});
 	}
-	
-    @Override
-    protected void onDestroy() {
-        if (mDialog != null) {
-            mDialog.dismiss();
-        }
-        super.onDestroy();
-    }
-	
+
+	@Override
+	public void onResults(Bundle b) {
+		final String hyp = b.getString("hyp");
+		final MainActivity that = this;
+		this.voiceInfo.post(new Runnable() {
+			public void run() {
+				that.voiceInfo.setText(hyp);
+				Log.d(getClass().getName(), "Hiding Dialog");
+				that.rec_dialog.dismiss();
+			}
+		});
+	}
+
+	@Override
+	public void onError(int err) {
+		final MainActivity that = this;
+		that.voiceInfo.post(new Runnable() {
+			public void run() {
+				that.rec_dialog.dismiss();
+			}
+		});
+	}
+
 }

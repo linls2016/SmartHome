@@ -88,7 +88,6 @@ public class LightActivity extends Activity {
 			myDate.append(temp);
 		}
 		String sendTime = "K" + myDate.toString() + "Z";
-		System.out.println("发送数值："+sendTime);
 		wifi.sendMsg(sendTime);
 	}
 	
@@ -228,7 +227,6 @@ public class LightActivity extends Activity {
 		if (sb.length() > 1) {
 			String content = sb.substring(0, sb.length()-1);
 			editor.putString(KEY_LIGHT_TIME_LIST, content);
-			System.out.println(content);
 		} else {
 			editor.putString(KEY_LIGHT_TIME_LIST, null);
 		}
