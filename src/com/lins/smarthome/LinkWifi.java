@@ -154,6 +154,7 @@ public class LinkWifi {
 				try {
 					BufferedReader buffer = new BufferedReader(new InputStreamReader(socket.getInputStream()));	//数据接收缓存
 					receiveMsg = buffer.readLine();			//获取接收数据，数据以'\n'作为接收结束标志
+//					System.out.println(Integer.toHexString(receiveMsg.charAt(0)));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}

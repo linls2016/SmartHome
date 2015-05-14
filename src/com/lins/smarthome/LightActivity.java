@@ -291,7 +291,6 @@ public class LightActivity extends Activity {
 					//TODO
 				}
 				if (event.getAction() == MotionEvent.ACTION_UP) {																				//确定被提起
-					//TODO
 					String start = (String) tv_add_light_start.getText();
 					String stop = (String) tv_add_light_stop.getText();
 					if (LightTimeKey) {

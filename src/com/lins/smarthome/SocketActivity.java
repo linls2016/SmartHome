@@ -62,9 +62,9 @@ public class SocketActivity extends Activity {
 		}
 		countForEnd = 8;
 		if (status) {
-			socket.setImageResource(R.drawable.off);
-		} else {
 			socket.setImageResource(R.drawable.on);
+		} else {
+			socket.setImageResource(R.drawable.off);
 		}
 		socket.setOnTouchListener(new SocketOnOff());
 	}
